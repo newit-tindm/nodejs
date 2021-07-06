@@ -30,6 +30,26 @@
 
 // Day 2 - ES6
 
+const Day2 = `
+    arrow function,
+    rest parameters,
+    Destructuring,
+    Spread,
+    Template literals,
+    Multi-line string,
+    Object literals,
+    Object properties,
+    Modules - import / export,
+    classes,
+    class inheritance,
+    class inheritance - super(),
+    class expression,
+    static class,
+    getter, setter
+`;
+
+console.log('Day 2: ', Day2);
+
 const constAndLet = (() => {
     const myBtn = document.getElementById('myBtn');
     // myBtn = 'reassigned'; // error
