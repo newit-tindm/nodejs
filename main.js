@@ -268,57 +268,65 @@ const chicken = new Chicken(2, 100, 'garden')
 
 console.log('class inheritance - super(): ', chicken);
 
+// class expression
 
-
-//
-var aggregation = (baseClass, ...mixins) => {
-    let base = class _Combined extends baseClass {
-        constructor (...args) {
-            super(...args)
-            mixins.forEach((mixin) => {
-                mixin.prototype.initializer.call(this)
-            })
-        }
+const pou = class Poultry1 {
+    constructor(weight, price) {
+        this.weight = weight;
+        this.price = price;
     }
-    let copyProps = (target, source) => {
-        Object.getOwnPropertyNames(source)
-            .concat(Object.getOwnPropertySymbols(source))
-            .forEach((prop) => {
-            if (prop.match(/^(?:constructor|prototype|arguments|caller|name|bind|call|apply|toString|length)$/))
-                return
-            Object.defineProperty(target, prop, Object.getOwnPropertyDescriptor(source, prop))
-        })
+}
+
+
+class Chicken1 extends pou {
+    constructor(weight, price, type) {
+        super(weight, price) 
+        this.type = type;
     }
-    mixins.forEach((mixin) => {
-        copyProps(base.prototype, mixin.prototype)
-        copyProps(base, mixin)
-    })
-    return base
 }
 
-class Colored {
-    initializer ()     { this._color = "white" }
-    get color ()       { return this._color }
-    set color (v)      { this._color = v }
+const chicken1 = new Chicken1(2, 100, 'garden')
+
+const pou1 = new pou(2, 200)
+
+console.log('class expression: ', chicken1);
+
+console.log('class expression: ', pou1);
+
+// static class  
+
+class Foo {
+    static someMethod() {
+        console.log('Static class: Some method');
+    }
+
+    anotherMethod() {
+        console.log('Another method');
+    }
 }
 
-class ZCoord {
-    initializer ()     { this._z = 0 }
-    get z ()           { return this._z }
-    set z (v)          { this._z = v }
+const foo = new Foo(); // instance - một object được tạo ra từ một class nào đó
+foo.anotherMethod();
+
+Foo.someMethod();
+
+// getter/ setter
+
+const obj = {
+    foo: 'This is value of getter',
+
+    getFoo: function() {
+        return this.foo;
+    },
+
+    setFoo: function (val) {
+        this.foo = val;
+    }
 }
 
-class Shape {
-    constructor (x, y) { this._x = x; this._y = y }
-    get x ()           { return this._x }
-    set x (v)          { this._x = v }
-    get y ()           { return this._y }
-    set y (v)          { this._y = v }
-}
+console.log('getter: ', obj.getFoo());
 
-class Rectangle extends aggregation(Shape, Colored, ZCoord) {}
+obj.setFoo('This is value of setter');
 
-var rect = new Rectangle(7, 42)
-rect.z     = 1000
-rect.color = "red"
-console.log(rect.x, rect.y, rect.z, rect.color)
+console.log('setter: ', obj.getFoo());
+
