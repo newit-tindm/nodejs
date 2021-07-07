@@ -225,7 +225,18 @@ class newCourse {
     }
 
     getName() {
-        return this.name;
+        return this.n
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        ame;
     }
 
     getPrice() {
@@ -350,3 +361,145 @@ obj.setFoo('This is value of setter');
 
 console.log('setter: ', obj.getFoo());
 
+//Day 3
+
+// Map/Set & WeakMap/WeakSet
+// map được sắp xếp theo các cặp key/value
+// set là một bộ các cặp giá trị duy nhất
+
+const map = new Map();
+console.log(map);
+
+
+map.set('firstName', 'tin');
+map.set('lastName', 'd');
+
+console.log('Map: ', map);
+
+const map1 = new Map([
+    ['firstName', 'tin'], 
+    ['lastName', 'dm']
+]);
+
+console.log('Map1: ', map1);
+
+const map2 = new Map([
+    ['animal', 'otter'],
+    ['shape', 'triangle'],
+    ['city', 'New York'],
+    ['country', 'Bulgaria'],
+]);
+
+// map - has - check sự tồn tại của 1 phần tử trong map, return boolean
+
+console.log('check exists: ', map2.has('country')); // true
+console.log('check exists: ', map2.has('Bulgaria')); // false
+
+// map - get - lấy ra một value từ key
+console.log('map get: ', map2.get('country')); // Bulgaria
+
+// map - size - lấy số lượng phần tử trong map
+console.log('map síze: ', map2.size); 
+
+// map - delete - xóa 1 item ra khỏi map với key của nó, return boolean
+console.log('map delete: ', map2.delete('animal'));
+console.log('map after deleted: ', map2);
+
+// map - clear - xóa tất cả
+
+// map - Keys, Values, Entries
+const map3 = new Map([
+    [1970, 'bell bottoms'],
+    [1980, 'leg warmers'],
+    [1990, 'flannel'],
+]);
+
+console.log('map keys: ', map3.keys());
+console.log('map values: ', map3.values());
+console.log('map entries: ', map3.entries());
+
+// map - loop
+console.log('map - forEach');
+const mapForEach = map3.forEach((value, key, map) => console.table({
+    'value': value,
+    'key': key,
+    'origin map': map
+}))
+
+// set - tập hợp các giá trị duy nhất
+
+const set = new Set();
+console.log('set: ', set);
+
+// add item to a set 
+set.add('first');
+set.add('second');
+set.add('third');
+set.add('third'); // unique item in set
+
+console.log('set 1: ', set);
+
+// convert Set to array
+
+const arr1 = [...set];
+
+console.log('convert Set to array: ', arr1);
+
+// delete, has, clear, size, keys, values, entries giống như map
+
+// set - forEach
+const arr2 = new Set(['first', 'second', 'third']);
+arr2.forEach(value => console.log('set forEach: ', value));
+
+// Object property assignment
+const target = { a: 1, b: 2 };
+const source = { b: 4, c: 5 };
+
+const returnedTarget = Object.assign(target, source);
+
+console.log('Object property assignment: ', target); // { a: 1, b: 4, c: 5 }
+
+console.log('Object property assignment: ', source); // {b: 4, c: 5 }
+
+console.log('Object property assignment: ', returnedTarget); // { a: 1, b: 4, c: 5 }
+
+// promise - xử lý bất đồng bộ
+
+console.log('promise');
+
+// status
+// 1. Pending
+// 2. Fulfilled
+// 3. Rejected
+
+var promise = new Promise(
+    // Executor
+    function(resolve, reject) {
+        // logic
+        // Thành công: resolve();
+        // Thất bại: reject();
+
+        // resolve(); //Fulfilled status
+
+        reject(); //Rejected status
+
+})
+
+promise
+    .then(function() {
+        // được thực thi khi resolve() được gọi trong executor
+        console.log('Successfully resolved');
+    }) // nhận callback function. 
+    .catch(function() {
+        // được thực thi khi reject() được gọi trong executor
+        console.log('Failure');
+    }) // nhận callback function
+    .finally(function() {
+        // được thực thi khi resolve() hoặc reject() được gọi trong executor
+        console.log('Done');
+    }) // nhận callback function
+
+// promise (Sync, async)
+
+// async in js
+// setTimeout, setInterval, fetch, XMLHttpRequest, fileReader, requestAnimation
